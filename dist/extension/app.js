@@ -58,7 +58,7 @@
 	// Constants
 	var DARK_TRESHOLD = 130,
 	    MIN_DARK_RATIO = 0.8,
-	    FRAME_RATE = 25,
+	    FRAME_RATE = 1000 / 15,
 	    BUMP_DELAY = FRAME_RATE * 3;
 
 	// Elements
