@@ -1,8 +1,10 @@
 import { GIF } from 'gif.js'
 
 // Constants
-const DARK_TRESHOLD = 130,
-      MIN_DARK_RATIO = 0.8
+const DARK_TRESHOLD  = 130,
+      MIN_DARK_RATIO = 0.8,
+      FRAME_RATE     = 25,
+      BUMP_DELAY     = FRAME_RATE * 3
 
 // Elements
 const canvas = document.createElement('canvas'),
@@ -45,9 +47,9 @@ function screenShot() {
   if (localMediaStream) {
     ctx.drawImage(video, 0, 0)
     if (!checkIfBlack()){
-      gif.addFrame(ctx, {copy: true, delay: 50})
+      gif.addFrame(ctx, {copy: true, delay: FRAME_RATE})
     } else {
-      stopRecording()
+      setTimeout(stopRecording, BUMP_DELAY)
     }
   }
 }
@@ -86,7 +88,7 @@ function toggleRecording() {
       document.querySelector('img').src = URL.createObjectURL(blob)
     })
 
-    timer = window.setInterval(screenShot, 50)
+    timer = window.setInterval(screenShot, FRAME_RATE)
   } else {
     stopRecording()
   }
