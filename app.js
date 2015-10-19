@@ -25,7 +25,7 @@ function screenShot() {
   if (localMediaStream) {
     var ctx = canvasFrame.getContext('2d');
     ctx.drawImage(video, 0, 0);
-    gif.addFrame(ctx, {copy: true});
+    gif.addFrame(ctx, {copy: true, delay: 50});
   }
 }
 
