@@ -1,0 +1,30 @@
+{
+  "name": "gifbump",
+  "version": "1.0.0",
+  "description": "GifBump yo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CestDiego/gifbump.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CestDiego/gifbump/issues"
+  },
+  "homepage": "https://github.com/CestDiego/gifbump#readme",
+  "dependencies": {
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "babel-runtime": "^5.8.25",
+    "css-loader": "^0.20.1",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "gif.js": "git+https://github.com/jnordberg/gif.js.git",
+    "imports-loader": "^0.6.5",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2"
+  }
+}

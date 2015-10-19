@@ -1,3 +1,5 @@
+require('gif.js')
+
 var DARK_TRESHOLD = 130;
 var MIN_DARK_RATIO = 0.8;
 
