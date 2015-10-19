@@ -8,6 +8,15 @@ function showCamera(videoSettings) {
       canvasFrame = document.createElement('canvas');
       canvasFrame.width = video.clientWidth;
       canvasFrame.height = video.clientHeight;
+      gif = new GIF({
+        workers: 4,
+        width: video.clientWidth,
+        height: video.clientHeight
+      })
+      gif.on('finished', function(blob){
+        document.querySelector('img').src = URL.createObjectURL(blob);
+      });
+
     };
   }, function (error) {console.log(error)});
 }
@@ -16,7 +25,7 @@ function screenShot() {
   if (localMediaStream) {
     var ctx = canvasFrame.getContext('2d');
     ctx.drawImage(video, 0, 0);
-    document.querySelector('img').src = canvasFrame.toDataURL('image/webp');
+    gif.addFrame(ctx, {copy: true});
   }
 }
 
@@ -26,14 +35,15 @@ function toggleRecording() {
   } else {
     window.clearInterval(frameTimeout)
     frameTimeout = null;
+    gif.render();
   }
 }
 
 var videoSettings = {
   video: {
     mandatory: {
-      minWidth: 480,
-      minHeight: 360
+      maxWidth: 640,
+      maxHeight: 360
     }
   }
 };
@@ -41,6 +51,7 @@ var video = document.querySelector('video');
 var localMediaStream = null;
 var frameTimeout = null;
 var canvasFrame = null;
+var gif = null
 
 video.addEventListener('click', toggleRecording, false);
 showCamera(videoSettings)
