@@ -8,8 +8,7 @@ import { GIF } from 'gif.js'
 navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
 
 // Create canvas and context
-const canvas = document.createElement('canvas'),
-      ctx    = canvas.getContext('2d')
+let ctx, canvas;
 
 // Constants
 const DARK_TRESHOLD  = 130,
@@ -33,7 +32,18 @@ export default class App extends React.Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    this.renderElements()
+  }
+
   componentDidMount() {
+    const elm = ReactDOM.findDOMNode(this)
+
+    canvas = elm.getElementsByTagName('canvas')[0];
+
+    ctx = canvas.getContext('2d');
+    this.renderStatic(ctx)
+
     // Get user media, or ask for permissions
     navigator.getUserMedia(videoSettings , stream => {
       this.setState({
@@ -41,10 +51,13 @@ export default class App extends React.Component {
       });
 
       // Get rendered video element
-      this.video = ReactDOM.findDOMNode(this).getElementsByTagName('video')[0];
+      this.video  = elm.getElementsByTagName('video')[0];
+
       this.video.src = window.URL.createObjectURL(stream);
 
       this.video.onloadedmetadata = e => {
+        this.loaded = true
+        canvas.parentNode.removeChild(canvas)
         canvas.width = this.video.clientWidth;
         canvas.height = this.video.clientHeight;
         this.passiveTimer =  window.setInterval(() => {
@@ -60,7 +73,20 @@ export default class App extends React.Component {
         access: false
       })
     })
-    this.renderElements()
+  }
+
+  renderStatic(ctx) {
+    if (this.loaded) return this.imageData = undefined
+
+    this.imageData = this.imageData || ctx.createImageData(ctx.canvas.width, ctx.canvas.height)
+
+    for (var i = 0, a = this.imageData.data.length; i < a; i++) {
+        this.imageData.data[i] = (Math.random() * 255)|0;
+    }
+    
+    ctx.putImageData(this.imageData, 0, 0);
+
+    if (!this.loaded) requestAnimationFrame(ts => this.renderStatic(ctx));
   }
 
   renderElements() {
@@ -214,6 +240,7 @@ export default class App extends React.Component {
 
     return(
       <div className="app flicker scanlines">
+        <canvas />
         <video autoPlay />
         <div className="cover">
           {(this.state.access) ? successCover : this.errorCover}
