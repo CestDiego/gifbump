@@ -233,9 +233,23 @@ export default class App extends React.Component {
           });
 
           this.gif.on('finished', blob => {
-            document.querySelector('.le-img').src = URL.createObjectURL(blob);
-            blob = this.blobToFile(blob);
-            this.upload(blob);
+            const blobURL = URL.createObjectURL(blob);
+            document.querySelector('.le-img').src = blobURL;
+
+            chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
+              /* chrome.runtime.onMessage.addListener(function (msg) {
+                 if (msg.action === 'sendLink') {
+                 this.copyToClipboard(msg.link)
+                 chrome.notifications.create({
+                 type: 'basic',
+                 iconUrl: 'icon.png',
+                 title:  'FistBump Uploaded!',
+                 message: `Link copied to clipboard! ${msg.content}`
+                 }, function (e) {
+                 console.log(e)
+                 })
+                 }
+                 }) */
           });
 
           this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);

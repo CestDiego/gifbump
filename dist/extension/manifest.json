@@ -13,9 +13,14 @@
   },
 
   "options_page": "options.html",
-  
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
   "permissions": [
-  	"gcm"
+  	"gcm",
+    "notifications",
+    "http://api.imgur.com/2/upload.json"
 	],
 
   "web_accessible_resources": [
