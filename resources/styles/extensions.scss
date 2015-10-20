@@ -98,7 +98,10 @@ svg {
 		text-anchor: middle;
 		text-align: center;
 		fill: white;
+		stroke: rgba(#666, 0.5);
+		stroke-width: 5px;
 		font-size: 10em;
+
 
 		opacity: 0;
 
@@ -149,10 +152,4 @@ svg {
 	0%     {opacity: 1;}
 	99%    {opacity: 1;}
 	100%   {opacity: 0;}
-}
-
-.ghost {
-	display: inline-block;
-	width: 1em;
-	opacity: 0.5;
 }
