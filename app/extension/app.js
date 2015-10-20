@@ -133,12 +133,23 @@ function upload(file) {
     // The URL of the image is:
     const link = JSON.parse(xhr.responseText).upload.links.original;
     console.log(link)
+    copyToClipboard(link)
   }
   // Ok, I don't handle the errors. An exercice for the reader.
   // And now, we send the formdata
   xhr.send(fd);
 }
 
+function copyToClipboard(text) {
+  const input = document.createElement('input');
+  input.style.position = 'fixed';
+  input.style.opacity = 0;
+  input.value = text;
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand('Copy');
+  document.body.removeChild(input);
+};
 // Start the app
 
 video.addEventListener('click', toggleRecording, false)
