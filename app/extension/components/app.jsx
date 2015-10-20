@@ -65,8 +65,7 @@ export default class App extends React.Component {
         this.passiveTimer =  window.setInterval(() => {
           ctx.drawImage(this.video, 0, 0);
           if (this.checkIfBlack()){
-            this.triggerCountdown()
-            window.setTimeout(() => this.triggerRecording(), 4000)
+            this.triggerRecording()
           }
         }, PASSIVE_FETCH_INTERVAL);
       };
@@ -79,21 +78,15 @@ export default class App extends React.Component {
     })
   }
 
-  triggerCountdown() {
-    this.setState({
-      countdown: true
-    })
-  }
-
   renderStatic(ctx) {
     if (this.loaded) return this.imageData = undefined
 
     this.imageData = this.imageData || ctx.createImageData(ctx.canvas.width, ctx.canvas.height)
 
-    for (var i = 0, a = this.imageData.data.length; i < a; i++) {
+      for (var i = 0, a = this.imageData.data.length; i < a; i++) {
         this.imageData.data[i] = (Math.random() * 255)|0;
-    }
-    
+      }
+
     ctx.putImageData(this.imageData, 0, 0);
 
     if (!this.loaded) requestAnimationFrame(ts => this.renderStatic(ctx));
@@ -204,26 +197,6 @@ export default class App extends React.Component {
     xhr.send(fd);
   }
 
-  toggleRecording() {
-    if (!this.timer) {
-      this.gif = new GIF({
-        workers: 4,
-        quality: 10,
-        width: this.video.clientWidth,
-        height: this.video.clientHeight
-      });
-
-      this.gif.on('finished', blob => {
-        document.querySelector('.le-img').src = URL.createObjectURL(blob);
-        blob = this.blobToFile(blob);
-        this.upload(blob);
-      });
-
-      this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
-    } else this.stopRecording();
-
-  }
-
   blobToFile(theBlob, fileName){
     /* A Blob() is almost a File() - it's just missing the two properties below which we will add */
     theBlob.lastModifiedDate = new Date();
@@ -244,10 +217,31 @@ export default class App extends React.Component {
 
   triggerRecording() {
     window.clearInterval(this.passiveTimer);
-    if (this.state.access) {
-      this.setState({recording: true});
-      this.toggleRecording();
-    }
+    this.setState({
+      countdown: true
+    });
+    window.setTimeout( () => {
+      if (this.state.access) {
+        this.setState({recording: true});
+
+        if (!this.timer) {
+          this.gif = new GIF({
+            workers: 4,
+            quality: 10,
+            width: this.video.clientWidth,
+            height: this.video.clientHeight
+          });
+
+          this.gif.on('finished', blob => {
+            document.querySelector('.le-img').src = URL.createObjectURL(blob);
+            blob = this.blobToFile(blob);
+            this.upload(blob);
+          });
+
+          this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
+        } else this.stopRecording();
+      }
+    }, 4000)
   }
 
   copyToClipboard(text) {
