@@ -66,7 +66,7 @@ export default class App extends React.Component {
 				<video autoPlay />
 				<div className="cover">
 					<img src="icon.png"/>
-					<h2 className={this.state.access ? '' : 'hidden'}>BUMP TO <small>(GIF)</small>BUMP!</h2>
+					<h2 className={this.state.access ? '' : 'hidden'}>BUMP or CLICK TO <small>(GIF)</small>BUMP!</h2>
 					<div>
 						<span className={'error ' + (this.state.access ? 'hidden' : '')}>
 							<br/>

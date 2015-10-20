@@ -19910,7 +19910,7 @@
 						_react2['default'].createElement(
 							'h2',
 							{ className: this.state.access ? '' : 'hidden' },
-							'BUMP TO ',
+							'BUMP or CLICK TO ',
 							_react2['default'].createElement(
 								'small',
 								null,

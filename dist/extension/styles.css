@@ -32,47 +32,47 @@
 
 @keyframes flicker {
   0% {
-    opacity: 0.99707; }
+    opacity: 0.47913; }
   5% {
-    opacity: 0.97202; }
+    opacity: 0.74018; }
   10% {
-    opacity: 0.63028; }
+    opacity: 0.08957; }
   15% {
-    opacity: 0.99746; }
+    opacity: 0.45939; }
   20% {
-    opacity: 0.7395; }
+    opacity: 0.35971; }
   25% {
-    opacity: 0.31783; }
+    opacity: 0.36632; }
   30% {
-    opacity: 0.57685; }
+    opacity: 0.54016; }
   35% {
-    opacity: 0.24157; }
+    opacity: 0.48516; }
   40% {
-    opacity: 0.87065; }
+    opacity: 0.35398; }
   45% {
-    opacity: 0.8791; }
+    opacity: 0.00009; }
   50% {
-    opacity: 0.69061; }
+    opacity: 0.8921; }
   55% {
-    opacity: 0.291; }
+    opacity: 0.95475; }
   60% {
-    opacity: 0.02279; }
+    opacity: 0.66806; }
   65% {
-    opacity: 0.51626; }
+    opacity: 0.30951; }
   70% {
-    opacity: 0.04923; }
+    opacity: 0.61494; }
   75% {
-    opacity: 0.1361; }
+    opacity: 0.36581; }
   80% {
-    opacity: 0.54419; }
+    opacity: 0.93105; }
   85% {
-    opacity: 0.82346; }
+    opacity: 0.08329; }
   90% {
-    opacity: 0.85168; }
+    opacity: 0.75394; }
   95% {
-    opacity: 0.48296; }
+    opacity: 0.545; }
   100% {
-    opacity: 0.29019; } }
+    opacity: 0.78869; } }
 
 .flicker {
   position: relative; }
@@ -114,7 +114,8 @@ body {
 
 .app {
   width: 640px;
-  height: 360px; }
+  height: 360px;
+  background: black; }
 
 .link {
   color: orange;
@@ -130,8 +131,6 @@ body {
   left: 0;
   right: 0;
   color: white; }
-  .cover .error {
-    color: black; }
   .cover img {
     animation: bump 1.5s ease-in-out;
     -moz-animation: bump 1.5s ease-in-out infinite;
@@ -141,11 +140,11 @@ body {
 {
   0% {
     transform: scale(1); }
-  10% {
+  25% {
     transform: scale(1); }
   50% {
-    transform: scale(1.2); }
-  90% {
+    transform: scale(1.25); }
+  75% {
     transform: scale(1); }
   100% {
     transform: scale(1); } }
@@ -154,11 +153,11 @@ body {
 {
   0% {
     transform: scale(1); }
-  10% {
+  25% {
     transform: scale(1); }
   50% {
-    transform: scale(1.2); }
-  90% {
+    transform: scale(1.25); }
+  75% {
     transform: scale(1); }
   100% {
     transform: scale(1); } }
@@ -167,11 +166,11 @@ body {
 {
   0% {
     transform: scale(1); }
-  10% {
+  25% {
     transform: scale(1); }
   50% {
-    transform: scale(1.2); }
-  90% {
+    transform: scale(1.25); }
+  75% {
     transform: scale(1); }
   100% {
     transform: scale(1); } }
