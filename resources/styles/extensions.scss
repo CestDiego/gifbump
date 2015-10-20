@@ -77,3 +77,79 @@ canvas {
 75%   {transform: scale(1);}
 100%   {transform: scale(1);}
 }
+
+svg {
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+
+	g {
+		transform: translateY(5.5em);
+	}
+
+	text {
+		text-anchor: middle;
+		text-align: center;
+		fill: white;
+		font-size: 10em;
+
+		opacity: 0;
+
+		&.count {
+					animation: count 1s linear;
+			   -moz-animation: count 1s linear;
+			-webkit-animation: count 1s linear;
+		}
+
+		&.count-1 {
+		    -webkit-animation-delay: 0s;
+				    animation-delay: 0s;
+		}
+
+		&.count-2 {
+		    -webkit-animation-delay: 1s;
+				    animation-delay: 1s;
+		}
+
+		&.count-3 {
+		    -webkit-animation-delay: 2s;
+				    animation-delay: 2s;
+		}
+
+		&.count-4 {
+		    -webkit-animation-delay: 3s;
+				    animation-delay: 3s;
+		}
+	}
+}
+
+@keyframes count
+{
+	0%     {opacity: 1;}
+	99%    {opacity: 1;}
+	100%   {opacity: 0;}
+}
+
+@-moz-keyframes count
+{
+	0%     {opacity: 1;}
+	99%    {opacity: 1;}
+	100%   {opacity: 0;}
+}
+
+@-webkit-keyframes count
+{
+	0%     {opacity: 1;}
+	99%    {opacity: 1;}
+	100%   {opacity: 0;}
+}
+
+.ghost {
+	display: inline-block;
+	width: 1em;
+	opacity: 0.5;
+}

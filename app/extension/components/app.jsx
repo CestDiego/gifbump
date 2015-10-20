@@ -57,13 +57,17 @@ export default class App extends React.Component {
 
       this.video.onloadedmetadata = e => {
         this.loaded = true
+        
         canvas.parentNode.removeChild(canvas)
         canvas.width = this.video.clientWidth;
         canvas.height = this.video.clientHeight;
+
         this.passiveTimer =  window.setInterval(() => {
           ctx.drawImage(this.video, 0, 0);
-          if (this.checkIfBlack())
-            window.setTimeout(() => this.triggerRecording(), 3000)
+          if (this.checkIfBlack()){
+            this.triggerCountdown()
+            window.setTimeout(() => this.triggerRecording(), 4000)
+          }
         }, PASSIVE_FETCH_INTERVAL);
       };
 
@@ -72,6 +76,12 @@ export default class App extends React.Component {
       this.setState({
         access: false
       })
+    })
+  }
+
+  triggerCountdown() {
+    this.setState({
+      countdown: true
     })
   }
 
@@ -105,6 +115,7 @@ export default class App extends React.Component {
         </span>
       </div>
     );
+    
     this.inactiveCover = (
       <div>
         <img src="icon.png" onClick={e => this.triggerRecording()} />
@@ -113,9 +124,24 @@ export default class App extends React.Component {
         </h2>
       </div>
     );
+
     this.activeCover = (
       <div>
-        <h2>We'll be recording</h2>
+        <h2>Bump da screen!</h2>
+
+      </div>
+    );
+
+    this.countdownCover = (
+      <div>
+        <svg>
+          <g>
+            <text className="count count-4" x="50%" y="50%">BUMP!</text>
+            <text className="count count-3" x="50%" y="50%">3</text>
+            <text className="count count-2" x="50%" y="50%">2</text>
+            <text className="count count-1" x="50%" y="50%">1</text>
+          </g>
+        </svg>
       </div>
     );
   }
@@ -236,7 +262,8 @@ export default class App extends React.Component {
   }
 
   render() {
-    let successCover = (this.state.recording ? this.activeCover : this.inactiveCover);
+    console.log(this.state.countdown)
+    let successCover = (this.state.recording ? this.activeCover : (this.state.countdown ? this.countdownCover : this.inactiveCover));
 
     return(
       <div className="app flicker scanlines">
