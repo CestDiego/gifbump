@@ -19816,7 +19816,7 @@
 	var _interopRequireDefault = __webpack_require__(2)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
-		value: true
+	  value: true
 	});
 
 	__webpack_require__(191);
@@ -19829,6 +19829,8 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _gifJs = __webpack_require__(3);
+
 	// Shim getUserMedia
 	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -19840,123 +19842,273 @@
 	var DARK_TRESHOLD = 130,
 	    MIN_DARK_RATIO = 0.8,
 	    FRAME_RATE = 1000 / 15,
+	    PASSIVE_FETCH_INTERVAL = FRAME_RATE * 5,
 	    BUMP_DELAY = FRAME_RATE * 3;
 
 	var videoSettings = {
-		video: {
-			mandatory: {
-				maxWidth: 640,
-				maxHeight: 360
-			}
-		}
+	  video: {
+	    mandatory: {
+	      maxWidth: 640,
+	      maxHeight: 360
+	    }
+	  }
 	};
 
 	var App = (function (_React$Component) {
-		_inherits(App, _React$Component);
+	  _inherits(App, _React$Component);
 
-		function App(props) {
-			_classCallCheck(this, App);
+	  function App(props) {
+	    _classCallCheck(this, App);
 
-			_get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
-			this.state = {};
-		}
+	    _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
+	    this.state = {};
+	  }
 
-		_createClass(App, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _this = this;
+	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this = this;
 
-				// Get user media, or ask for permissions
-				navigator.getUserMedia(videoSettings, function (stream) {
-					_this.setState({
-						access: true
-					});
+	      // Get user media, or ask for permissions
+	      navigator.getUserMedia(videoSettings, function (stream) {
+	        _this.setState({
+	          access: true
+	        });
 
-					// Get rendered video element
-					var video = _reactDom2['default'].findDOMNode(_this).getElementsByTagName('video')[0];
+	        // Get rendered video element
+	        _this.video = _reactDom2['default'].findDOMNode(_this).getElementsByTagName('video')[0];
+	        _this.video.src = window.URL.createObjectURL(stream);
 
-					video.onloadedmetadata = function (e) {
-						canvas.width = video.clientWidth;
-						canvas.height = video.clientHeight;
-					};
+	        _this.video.onloadedmetadata = function (e) {
+	          canvas.width = _this.video.clientWidth;
+	          canvas.height = _this.video.clientHeight;
+	          _this.passiveTimer = window.setInterval(function () {
+	            ctx.drawImage(_this.video, 0, 0);
+	            if (_this.checkIfBlack()) window.setTimeout(function () {
+	              return _this.triggerRecording();
+	            }, 3000);
+	          }, PASSIVE_FETCH_INTERVAL);
+	        };
 
-					video.src = window.URL.createObjectURL(stream);
-					// localMediaStream = stream
-				}, function (e) {
-					_this.setState({
-						access: false
-					});
-				});
-			}
-		}, {
-			key: 'openOptions',
-			value: function openOptions() {
-				console.log('WHAAKLSJLAKJS');
-				chrome.tabs.create({ url: 'options.html' });
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var _this2 = this;
+	        _this.localMediaStream = stream;
+	      }, function (e) {
+	        _this.setState({
+	          access: false
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'screenShot',
+	    value: function screenShot() {
+	      var _this2 = this;
 
-				return _react2['default'].createElement(
-					'div',
-					{ className: 'app flicker scanlines' },
-					_react2['default'].createElement('video', { autoPlay: true }),
-					_react2['default'].createElement(
-						'div',
-						{ className: 'cover' },
-						_react2['default'].createElement('img', { src: 'icon.png' }),
-						_react2['default'].createElement(
-							'h2',
-							{ className: this.state.access ? '' : 'hidden' },
-							'BUMP or CLICK TO ',
-							_react2['default'].createElement(
-								'small',
-								null,
-								'(GIF)'
-							),
-							'BUMP!'
-						),
-						_react2['default'].createElement(
-							'div',
-							null,
-							_react2['default'].createElement(
-								'span',
-								{ className: 'error ' + (this.state.access ? 'hidden' : '') },
-								_react2['default'].createElement('br', null),
-								_react2['default'].createElement(
-									'span',
-									null,
-									'GIF ME ACCESS!'
-								),
-								_react2['default'].createElement('br', null),
-								_react2['default'].createElement('br', null),
-								_react2['default'].createElement(
-									'span',
-									null,
-									_react2['default'].createElement(
-										'small',
-										null,
-										'We need to access your camera for bumping action, go to  ',
-										_react2['default'].createElement(
-											'span',
-											{ className: 'link', onClick: function (e) {
-													return _this2.openOptions(e);
-												} },
-											'options'
-										),
-										'  to enable camera access'
-									)
-								)
-							)
-						)
-					)
-				);
-			}
-		}]);
+	      if (this.localMediaStream) {
+	        ctx.drawImage(this.video, 0, 0);
+	        if (!this.checkIfBlack()) this.gif.addFrame(ctx, { copy: true, delay: FRAME_RATE });else window.setTimeout(function (e) {
+	          return _this2.stopRecording();
+	        }, BUMP_DELAY);
+	      }
+	    }
+	  }, {
+	    key: 'checkIfBlack',
+	    value: function checkIfBlack() {
+	      var count = 0,
+	          dark = 0,
+	          cur = undefined,
+	          imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-		return App;
+	      for (var i = 0; i < canvas.width; i += 40) {
+	        for (var j = 0; i < canvas.height; i += 40) {
+	          count++;
+	          cur = (j * canvas.width + i) * 4;
+	          // (R + G + B)
+	          if (imageData[cur] + imageData[cur + 1] + imageData[cur + 2] < DARK_TRESHOLD) dark++;
+	        }
+	      }
+	      var result = dark / count > MIN_DARK_RATIO;
+	      return result;
+	    }
+	  }, {
+	    key: 'upload',
+	    value: function upload(file) {
+	      var _this3 = this;
+
+	      // file is from a <input> tag or from Drag'n Drop
+	      // Is the file an image?
+
+	      if (!file || !file.type.match(/image.*/)) return;
+
+	      // It is!
+	      // Let's build a FormData object
+
+	      var fd = new FormData();
+	      fd.append("image", file); // Append the file
+	      fd.append("key", "6528448c258cff474ca9701c5bab6927");
+	      // Get your own key: http://api.imgur.com/
+
+	      // Create the XHR (Cross-Domain XHR FTW!!!)
+	      var xhr = new XMLHttpRequest();
+	      xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
+	      xhr.onload = function () {
+	        // Big win!
+	        // The URL of the image is:
+	        var link = JSON.parse(xhr.responseText).upload.links.original;
+	        console.log(link);
+	        _this3.copyToClipboard(link);
+	      };
+	      // Ok, I don't handle the errors. An exercice for the reader.
+	      // And now, we send the formdata
+	      xhr.send(fd);
+	    }
+	  }, {
+	    key: 'toggleRecording',
+	    value: function toggleRecording() {
+	      var _this4 = this;
+
+	      if (!this.timer) {
+	        this.gif = new _gifJs.GIF({
+	          workers: 4,
+	          quality: 10,
+	          width: this.video.clientWidth,
+	          height: this.video.clientHeight
+	        });
+
+	        this.gif.on('finished', function (blob) {
+	          document.querySelector('.le-img').src = URL.createObjectURL(blob);
+	          blob = _this4.blobToFile(blob);
+	          _this4.upload(blob);
+	        });
+
+	        this.timer = window.setInterval(function (e) {
+	          return _this4.screenShot();
+	        }, FRAME_RATE);
+	      } else this.stopRecording();
+	    }
+	  }, {
+	    key: 'blobToFile',
+	    value: function blobToFile(theBlob, fileName) {
+	      /* A Blob() is almost a File() - it's just missing the two properties below which we will add */
+	      theBlob.lastModifiedDate = new Date();
+	      theBlob.name = fileName;
+	      return theBlob;
+	    }
+	  }, {
+	    key: 'stopRecording',
+	    value: function stopRecording() {
+	      window.clearInterval(this.timer);
+	      this.timer = null;
+	      this.gif.render();
+	    }
+	  }, {
+	    key: 'openOptions',
+	    value: function openOptions() {
+	      console.log('WHAAKLSJLAKJS');
+	      chrome.tabs.create({ url: 'options.html' });
+	    }
+	  }, {
+	    key: 'triggerRecording',
+	    value: function triggerRecording() {
+	      window.clearInterval(this.passiveTimer);
+	      if (this.state.access) {
+	        this.setState({ recording: true });
+	        this.toggleRecording();
+	      }
+	    }
+	  }, {
+	    key: 'copyToClipboard',
+	    value: function copyToClipboard(text) {
+	      var input = document.createElement('input');
+	      input.style.position = 'fixed';
+	      input.style.opacity = 0;
+	      input.value = text;
+	      document.body.appendChild(input);
+	      input.select();
+	      document.execCommand('Copy');
+	      document.body.removeChild(input);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this5 = this;
+
+	      var errorCover = _react2['default'].createElement(
+	        'div',
+	        null,
+	        _react2['default'].createElement('img', { src: 'icon.png' }),
+	        _react2['default'].createElement(
+	          'span',
+	          { className: 'error' },
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'span',
+	            null,
+	            'GIF ME ACCESS!'
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'span',
+	            null,
+	            _react2['default'].createElement(
+	              'small',
+	              null,
+	              'We need to access your camera for bumping action, go to  ',
+	              _react2['default'].createElement(
+	                'span',
+	                { className: 'link', onClick: function (e) {
+	                    return _this5.openOptions(e);
+	                  } },
+	                'options'
+	              ),
+	              '  to enable camera access'
+	            )
+	          )
+	        )
+	      );
+	      var inactiveCover = _react2['default'].createElement(
+	        'div',
+	        null,
+	        _react2['default'].createElement('img', { src: 'icon.png', onClick: function (e) {
+	            return _this5.triggerRecording();
+	          } }),
+	        _react2['default'].createElement(
+	          'h2',
+	          null,
+	          'BUMP TO ',
+	          _react2['default'].createElement(
+	            'small',
+	            null,
+	            '(GIF)'
+	          ),
+	          'BUMP!'
+	        )
+	      );
+	      var activeCover = _react2['default'].createElement(
+	        'div',
+	        null,
+	        _react2['default'].createElement(
+	          'h2',
+	          null,
+	          'We\'ll be recording'
+	        )
+	      );
+	      var successCover = this.state.recording ? activeCover : inactiveCover;
+
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'app flicker scanlines' },
+	        _react2['default'].createElement('video', { autoPlay: true }),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'cover' },
+	          this.state.access ? successCover : errorCover
+	        ),
+	        _react2['default'].createElement('img', { className: 'le-img', alt: '', src: '' })
+	      );
+	    }
+	  }]);
+
+	  return App;
 	})(_react2['default'].Component);
 
 	exports['default'] = App;
