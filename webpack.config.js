@@ -6,8 +6,8 @@ module.exports = [
 		name: 'extension',
 
 	    entry: {
-	        app:     ['./app/extension/app.js'],
-	        options: ['./app/extension/options.js']
+	        app:     ['./app/extension/app.jsx'],
+	        options: ['./app/extension/options.jsx']
 	    },
 
 	    output: {
@@ -23,10 +23,19 @@ module.exports = [
 	                exclude: /(node_modules|bower_components)/,
 	                loader: 'babel?optional[]=runtime'
 	            },
+	            // // CSS loader
+	            // {
+	            //     test: /\.css$/,
+	            //     loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+	            // }
 	            // CSS loader
 	            {
-	                test: /\.css$/,
-	                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+	                test: /\.scss$/,
+	                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
+	            },
+	            {
+	                test: /\.woff2$/,
+	                loader: 'file'
 	            }
 	        ]
 	    },
@@ -36,7 +45,7 @@ module.exports = [
 	            'resources',
 	            'app'
 	        ],
-	        extensions: ['.js', '.json', '']
+	        extensions: ['.js', '.json', '.jsx', '']
 	    },
 	    plugins: [
 	        new ExtractTextPlugin('styles.css')

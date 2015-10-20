@@ -1,0 +1,71 @@
+@import 'fonts.scss';
+@import './utils/screen.scss';
+
+
+body {
+	font-family: 'Press Start 2P';
+	margin: 0;
+}
+
+.hidden {
+	display: none;
+}
+
+.app {
+	width: 640px;
+	height: 360px;
+}
+
+.link {
+	color: orange;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.cover {
+	padding-top: 45px;
+	position: absolute;
+	text-align: center;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: white;
+
+	.error {
+		color: black;
+	}
+
+	img {
+				animation:bump 1.5s ease-in-out;
+		   -moz-animation:bump 1.5s ease-in-out infinite;
+		-webkit-animation:bump 1.5s ease-in-out infinite;
+	}
+}
+
+@keyframes bump
+{
+0%   {transform: scale(1);}
+10%   {transform: scale(1);}
+50%  {transform: scale(1.2);}
+90%   {transform: scale(1);}
+100%   {transform: scale(1);}
+}
+
+@-moz-keyframes bump
+{
+0%   {transform: scale(1);}
+10%   {transform: scale(1);}
+50%  {transform: scale(1.2);}
+90%   {transform: scale(1);}
+100%   {transform: scale(1);}
+}
+
+@-webkit-keyframes bump
+{
+0%   {transform: scale(1);}
+10%   {transform: scale(1);}
+50%  {transform: scale(1.2);}
+90%   {transform: scale(1);}
+100%   {transform: scale(1);}
+}

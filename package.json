@@ -22,8 +22,12 @@
     "babel-runtime": "^5.8.25",
     "css-loader": "^0.20.1",
     "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
     "gif.js": "git+https://github.com/jnordberg/gif.js.git",
     "imports-loader": "^0.6.5",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.2"
   }
