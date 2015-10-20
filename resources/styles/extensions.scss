@@ -44,6 +44,9 @@ canvas {
 	right: 0;
 	color: white;
 
+			text-stroke: 0.5px rgba(#666, 0.5);
+	-webkit-text-stroke: 0.5px rgba(#666, 0.5);
+
 	img {
 				animation:bump 1.5s ease-in-out;
 		   -moz-animation:bump 1.5s ease-in-out infinite;
