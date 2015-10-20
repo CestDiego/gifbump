@@ -60,6 +60,38 @@ export default class App extends React.Component {
         access: false
       })
     })
+    this.renderElements()
+  }
+
+  renderElements() {
+    this.errorCover = (
+      <div>
+        <img src="icon.png" />
+        <span className="error">
+          <br/>
+          <span>GIF ME ACCESS!</span>
+          <br/><br/>
+          <span><small>
+            We need to access your camera for bumping action, go to &nbsp;
+            <span className="link" onClick={ e => this.openOptions(e) }>options</span>
+            &nbsp; to enable camera access
+          </small></span>
+        </span>
+      </div>
+    );
+    this.inactiveCover = (
+      <div>
+        <img src="icon.png" onClick={e => this.triggerRecording()} />
+        <h2>
+          BUMP TO <small>(GIF)</small>BUMP!
+        </h2>
+      </div>
+    );
+    this.activeCover = (
+      <div>
+        <h2>We'll be recording</h2>
+      </div>
+    );
   }
 
   screenShot() {
@@ -178,44 +210,16 @@ export default class App extends React.Component {
   }
 
   render() {
-    const errorCover = (
-      <div>
-        <img src="icon.png" />
-        <span className="error">
-          <br/>
-          <span>GIF ME ACCESS!</span>
-          <br/><br/>
-          <span><small>
-            We need to access your camera for bumping action, go to &nbsp;
-            <span className="link" onClick={ e => this.openOptions(e) }>options</span>
-            &nbsp; to enable camera access
-          </small></span>
-        </span>
-      </div>
-    );
-    const inactiveCover = (
-      <div>
-        <img src="icon.png" onClick={e => this.triggerRecording()} />
-        <h2>
-          BUMP TO <small>(GIF)</small>BUMP!
-        </h2>
-      </div>
-    );
-    const activeCover = (
-      <div>
-        <h2>We'll be recording</h2>
-      </div>
-    );
-    let successCover = (this.state.recording ? activeCover : inactiveCover)
+    let successCover = (this.state.recording ? this.activeCover : this.inactiveCover);
 
-      return(
-        <div className="app flicker scanlines">
+    return(
+      <div className="app flicker scanlines">
         <video autoPlay />
         <div className="cover">
-        {(this.state.access) ? successCover : errorCover}
+          {(this.state.access) ? successCover : this.errorCover}
+        </div>
+        <img className="le-img" alt="" src=""/>
       </div>
-      <img className="le-img" alt="" src=""/>
-      </div>
-      )
+    )
   }
 }
