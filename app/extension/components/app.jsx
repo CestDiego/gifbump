@@ -130,9 +130,9 @@ export default class App extends React.Component {
         <svg>
           <g>
             <text className="count count-4" x="50%" y="50%">BUMP!</text>
-            <text className="count count-3" x="50%" y="50%">3</text>
+            <text className="count count-3" x="50%" y="50%">1</text>
             <text className="count count-2" x="50%" y="50%">2</text>
-            <text className="count count-1" x="50%" y="50%">1</text>
+            <text className="count count-1" x="50%" y="50%">3</text>
           </g>
         </svg>
       </div>
