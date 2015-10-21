@@ -270,7 +270,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.countdown)
     let successCover = (this.state.recording ? this.activeCover : (this.state.countdown ? this.countdownCover : this.inactiveCover));
 
     return(
