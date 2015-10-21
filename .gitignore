@@ -1,0 +1,5 @@
+.tern-port
+/node_modules
+dist/extension/app.js
+dist/extension/options.js
+dist/extension/styles.css
