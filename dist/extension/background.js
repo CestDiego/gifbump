@@ -1,4 +1,15 @@
 function upload(file) {
+  var id = String(Date.now())
+
+  chrome.notifications.create(id, {
+    type: 'progress',
+    iconUrl: 'icon.png',
+    title:  'Uploading GifBump!',
+    message: "Uploading bump to our server in da cloud! (not imgur...)",
+    progress: 0
+  }, function (e) {
+    console.log(e)
+  })
 
   // file is from a <input> tag or from Drag'n Drop
   // Is the file an image?
@@ -16,6 +27,7 @@ function upload(file) {
   // Create the XHR (Cross-Domain XHR FTW!!!)
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
+
   xhr.onload = function() {
     // Big win!
     // The URL of the image is:
@@ -25,15 +37,32 @@ function upload(file) {
     console.log(link);
     chrome.runtime.sendMessage({ action: 'sendLink', content: link });
     copyToClipboard(link)
-    chrome.notifications.create({
+
+    chrome.notifications.update(id, {
       type: 'basic',
       iconUrl: 'icon.png',
-      title:  'FistBump Uploaded!',
-      message: "Link copied to clipboard! " + link
-    }, function (e) {
-      console.log(e)
+      title:  'GifBump Uploaded!',
+      message: "Your GifBump is copied to the clipboard! Rad!\n" + link
+    }, function (e) {console.log(e)})
+
+    chrome.notifications.onClicked.addListener(function (e){window.open(link)})
+  }
+
+  xhr.upload.onload = function(){
+    chrome.notifications.update(id, {
+      type: 'basic',
+      iconUrl: 'icon.png',
+      title:  'Processing Bump...',
+      message: "Waiting for \"our server\" to get the link..."
+    }, function (e) {console.log(e)})
+  }
+
+  xhr.upload.onprogress = function(e){
+    chrome.notifications.update(id, {
+      progress: Math.round((e.loaded / e.total) * 100)
     })
   }
+
   // Ok, I don't handle the errors. An exercice for the reader.
   // And now, we send the formdata
   xhr.send(fd);

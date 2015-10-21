@@ -120,7 +120,14 @@ export default class App extends React.Component {
 
     this.activeCover = (
       <div>
-        <h2>Bump da screen!</h2>
+        <h2>Bump da camera!</h2>
+
+      </div>
+    );
+
+    this.capturedCover = (
+      <div>
+        <h2>Uploading your GifBump!</h2>
 
       </div>
     );
@@ -129,8 +136,7 @@ export default class App extends React.Component {
       <div>
         <svg>
           <g>
-            <text className="count count-4" x="50%" y="50%">BUMP!</text>
-            <text className="count count-3" x="50%" y="50%">1</text>
+            <text className="count count-3" x="50%" y="50%">BUMP!</text>
             <text className="count count-2" x="50%" y="50%">2</text>
             <text className="count count-1" x="50%" y="50%">3</text>
           </g>
@@ -237,25 +243,14 @@ export default class App extends React.Component {
             document.querySelector('.le-img').src = blobURL;
 
             chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
-              /* chrome.runtime.onMessage.addListener(function (msg) {
-                 if (msg.action === 'sendLink') {
-                 this.copyToClipboard(msg.link)
-                 chrome.notifications.create({
-                 type: 'basic',
-                 iconUrl: 'icon.png',
-                 title:  'FistBump Uploaded!',
-                 message: `Link copied to clipboard! ${msg.content}`
-                 }, function (e) {
-                 console.log(e)
-                 })
-                 }
-                 }) */
+
+            this.setState({captured: true})
           });
 
           this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
         } else this.stopRecording();
       }
-    }, 4000)
+    }, 3000)
   }
 
   copyToClipboard(text) {
@@ -270,7 +265,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    let successCover = (this.state.recording ? this.activeCover : (this.state.countdown ? this.countdownCover : this.inactiveCover));
+    let successCover = (this.state.recording ? (this.state.captured ? this.capturedCover : this.activeCover) : (this.state.countdown ? this.countdownCover : this.inactiveCover));
 
     return(
       <div className="app flicker scanlines">

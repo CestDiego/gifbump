@@ -20,10 +20,12 @@
   "permissions": [
   	"gcm",
     "notifications",
-    "http://api.imgur.com/2/upload.json"
+    "http://api.imgur.com/2/upload.json",
+    "http://go.gifbu.mp/"
 	],
 
   "web_accessible_resources": [
-    "*.woff2"
+    "*.woff2",
+    "*.gif"
   ]
 }
