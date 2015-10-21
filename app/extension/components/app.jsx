@@ -132,6 +132,13 @@ export default class App extends React.Component {
       </div>
     );
 
+    this.linkCover = (
+      <div>
+        <h2>Your GifBump is Uploaded!</h2>
+        <p>But we don't have the link, bummer...</p>
+      </div>
+    );
+
     this.countdownCover = (
       <div>
         <svg>
@@ -214,6 +221,7 @@ export default class App extends React.Component {
     window.clearInterval(this.timer);
     this.timer = null;
     this.gif.render();
+    this.setState({captured: true})
   }
 
   openOptions() {
@@ -244,7 +252,10 @@ export default class App extends React.Component {
 
             chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
 
-            this.setState({captured: true})
+            chrome.runtime.onMessage.addListener(msg => {
+              if (msg.action === 'sendLink') this.setState({link: msg.content})
+              if (msg.action === 'error') this.setState({error: true})
+            })
           });
 
           this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
@@ -265,7 +276,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    let successCover = (this.state.recording ? (this.state.captured ? this.capturedCover : this.activeCover) : (this.state.countdown ? this.countdownCover : this.inactiveCover));
+    let successCover = (this.state.recording ? (this.state.captured ? (this.state.link ? this.linkCover : this.capturedCover) : this.activeCover) : (this.state.countdown ? this.countdownCover : this.inactiveCover));
 
     return(
       <div className="app flicker scanlines">

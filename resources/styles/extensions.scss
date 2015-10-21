@@ -6,6 +6,11 @@
 body {
 	font-family: 'Press Start 2P';
 	margin: 0;
+
+	* {
+			   user-select: none;
+		webkit-user-select: none;
+	}
 }
 
 canvas {
