@@ -20,6 +20,8 @@ function upload(file) {
     // Big win!
     // The URL of the image is:
     var link = JSON.parse(xhr.responseText).upload.links.original;
+    // use our own domain for gifs
+    link = link.replace('i.imgur.com', 'go.gifbu.mp')
     console.log(link);
     chrome.runtime.sendMessage({ action: 'sendLink', content: link });
     copyToClipboard(link)
