@@ -1,6 +1,6 @@
 var http = require('http');
 
-http.createServer(onRequest).listen(process.env.OPENSHIFT_NODEJS_PORT || 3000);
+http.createServer(onRequest).listen(process.env.OPENSHIFT_NODEJS_PORT || 3000, process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 
 function onRequest(client_req, client_res) {
   console.log('serve: ' + client_req.url);
