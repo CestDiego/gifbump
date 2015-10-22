@@ -6,7 +6,7 @@ module.exports = [
 		name: 'extension',
 
 	    entry: {
-	        app:     ['./app/extension/index.jsx'],
+	        app:     ['./app/extension/app.jsx'],
 	        options: ['./app/extension/options.jsx']
 	    },
 
