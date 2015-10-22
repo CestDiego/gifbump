@@ -1,5 +1,5 @@
 function upload(file) {
-  var id = String(Date.now())
+  var id = String(Date.now());
 
   chrome.notifications.create(id, {
     type: 'progress',
@@ -8,8 +8,8 @@ function upload(file) {
     message: "Uploading bump to our server in da cloud! (not imgur...)",
     progress: 0
   }, function (e) {
-    console.log(e)
-  })
+    console.log(e);
+  });
 
   // file is from a <input> tag or from Drag'n Drop
   // Is the file an image?
@@ -25,18 +25,18 @@ function upload(file) {
   // Get your own key: http://api.imgur.com/
 
   // Create the XHR (Cross-Domain XHR FTW!!!)
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
+  var GifBump = new XMLHttpRequest();
+  GifBump.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
 
-  xhr.onload = function() {
+  GifBump.onload = function() {
     // Big win!
     // The URL of the image is:
-    var link = JSON.parse(xhr.responseText).upload.links.original;
+    var link = JSON.parse(GifBump.responseText).upload.links.original;
     // use our own domain for gifs
-    link = link.replace('i.imgur.com', 'go.gifbu.mp')
+    link = link.replace('i.imgur.com', 'go.gifbu.mp');
     console.log(link);
     chrome.runtime.sendMessage({ action: 'sendLink', content: link });
-    copyToClipboard(link)
+    copyToClipboard(link);
 
     chrome.notifications.update(id, {
       type: 'basic',
@@ -48,7 +48,7 @@ function upload(file) {
     chrome.notifications.onClicked.addListener(function (e){window.open(link)})
   }
 
-  xhr.upload.onload = function(){
+  GifBump.upload.onload = function(){
     chrome.notifications.update(id, {
       type: 'basic',
       iconUrl: 'icon.png',
@@ -57,7 +57,7 @@ function upload(file) {
     }, function (e) {console.log(e)})
   }
 
-  xhr.upload.onprogress = function(e){
+  GifBump.upload.onprogress = function(e){
     chrome.notifications.update(id, {
       progress: Math.round((e.loaded / e.total) * 100)
     })
@@ -65,7 +65,7 @@ function upload(file) {
 
   // Ok, I don't handle the errors. An exercice for the reader.
   // And now, we send the formdata
-  xhr.send(fd);
+  GifBump.send(fd);
 }
 
 function blobToFile(theBlob, fileName){
@@ -77,6 +77,7 @@ function blobToFile(theBlob, fileName){
 
 function copyToClipboard(text) {
   var input = document.createElement('input');
+
   input.style.position = 'fixed';
   input.style.opacity = 0;
   input.value = text;
@@ -89,15 +90,15 @@ function copyToClipboard(text) {
 chrome.runtime.onMessage.addListener(function (msg) {
   if (msg.action === 'uploadFile'){
     var blobURL = msg.content
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', blobURL, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function(e) {
+    var getGIF = new XMLHttpRequest();
+    getGIF.open('GET', blobURL, true);
+    getGIF.responseType = 'blob';
+    getGIF.onload = function(e) {
       if (this.status == 200) {
-        var myBlob = blobToFile(this.response, "holi.gif");
+        var myBlob = blobToFile(this.response, "le.gif");
         upload(myBlob)
       }
     };
-    xhr.send();
+    getGIF.send();
   }
 })
