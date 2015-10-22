@@ -280,9 +280,7 @@ export default class App extends React.Component {
 
     return(
       <div className="app flicker scanlines">
-        <canvas />
-        <video autoPlay />
-        <img className="le-img" alt="" src=""/>
+        <Video/>
         <div className="cover">
           {(this.state.access) ? successCover : this.errorCover}
         </div>
