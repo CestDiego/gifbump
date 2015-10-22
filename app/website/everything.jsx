@@ -43,7 +43,7 @@ export default class Everything extends React.Component {
     return (
       <div className="app flicker scanlines container-fluid">
       		<div className="app-content">
-      			<img className="bump" src="icon.png"/>
+      			<img className="bump" src="dist/website/icon.png"/>
       			<h1>GifBump!</h1>
       			<a href="https://chrome.google.com/webstore/detail/gifbump/bacfjdhpbcepapbkibpdmpaikphomene" className="extension-badge"><img src="https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_496x150.png"/></a>
       		</div>
