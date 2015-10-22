@@ -2313,47 +2313,47 @@ a.bg-danger:hover {
 
 @keyframes flicker {
   0% {
-    opacity: 0.26003; }
+    opacity: 0.68104; }
   5% {
-    opacity: 0.71776; }
+    opacity: 0.26268; }
   10% {
-    opacity: 0.18953; }
+    opacity: 0.39052; }
   15% {
-    opacity: 0.64785; }
+    opacity: 0.67582; }
   20% {
-    opacity: 0.4306; }
+    opacity: 0.37259; }
   25% {
-    opacity: 0.8045; }
+    opacity: 0.58725; }
   30% {
-    opacity: 0.43043; }
+    opacity: 0.75895; }
   35% {
-    opacity: 0.18957; }
+    opacity: 0.16395; }
   40% {
-    opacity: 0.94676; }
+    opacity: 0.98779; }
   45% {
-    opacity: 0.84779; }
+    opacity: 0.84552; }
   50% {
-    opacity: 0.26256; }
+    opacity: 0.94156; }
   55% {
-    opacity: 0.37304; }
+    opacity: 0.5007; }
   60% {
-    opacity: 0.97561; }
+    opacity: 0.91105; }
   65% {
-    opacity: 0.19329; }
+    opacity: 0.6744; }
   70% {
-    opacity: 0.56569; }
+    opacity: 0.22253; }
   75% {
-    opacity: 0.9564; }
+    opacity: 0.35221; }
   80% {
-    opacity: 0.58053; }
+    opacity: 0.46406; }
   85% {
-    opacity: 0.49206; }
+    opacity: 0.41478; }
   90% {
-    opacity: 0.31459; }
+    opacity: 0.18388; }
   95% {
-    opacity: 0.04284; }
+    opacity: 0.31728; }
   100% {
-    opacity: 0.34293; } }
+    opacity: 0.26093; } }
 
 .flicker {
   position: relative; }
