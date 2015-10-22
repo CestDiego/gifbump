@@ -1,22 +1,23 @@
-import 'styles/extensions.scss'
+import 'styles/extensions.scss';
 
-import React 	from 'react'
-import ReactDOM from 'react-dom'
-import { GIF } from 'gif.js'
+import React 	from 'react';
+import ReactDOM from 'react-dom';
+import { GIF } from 'gif.js';
+
+import Video from './Video';
 
 // Shim getUserMedia
-navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
+navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 // Create canvas and context
 let ctx, canvas;
 
 // Constants
-const DARK_TRESHOLD  = 130,
-  MIN_DARK_RATIO = 0.8,
-  FRAME_RATE     = 1000 / 15,
-  PASSIVE_FETCH_INTERVAL = FRAME_RATE * 5,
-  BUMP_DELAY     = FRAME_RATE * 3
-
+const DARK_TRESHOLD          = 130;
+const MIN_DARK_RATIO         = 0.8;
+const FRAME_RATE             = 1000 / 15;
+const PASSIVE_FETCH_INTERVAL = FRAME_RATE * 5;
+const BUMP_DELAY             = FRAME_RATE * 3;
 const videoSettings = {
   video: {
     mandatory: {
@@ -24,31 +25,29 @@ const videoSettings = {
       maxHeight: 360
     }
   }
-}
+};
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {stage: "inactive"};
   }
 
   componentWillMount() {
-    this.renderElements()
+    this.renderElements();
   }
 
   componentDidMount() {
-    const elm = ReactDOM.findDOMNode(this)
+    const elm = ReactDOM.findDOMNode(this);
 
     canvas = elm.getElementsByTagName('canvas')[0];
 
     ctx = canvas.getContext('2d');
-    this.renderStatic(ctx)
+    this.renderStatic(ctx);
 
     // Get user media, or ask for permissions
-    navigator.getUserMedia(videoSettings , stream => {
-      this.setState({
-        access: true
-      });
+    navigator.getUserMedia(videoSettings, stream => {
+      this.setState({access: true});
 
       // Get rendered video element
       this.video  = elm.getElementsByTagName('video')[0];
@@ -56,26 +55,22 @@ export default class App extends React.Component {
       this.video.src = window.URL.createObjectURL(stream);
 
       this.video.onloadedmetadata = e => {
-        this.loaded = true
-        
-        canvas.parentNode.removeChild(canvas)
+        this.loaded = true;
+
+        canvas.parentNode.removeChild(canvas);
         canvas.width = this.video.clientWidth;
         canvas.height = this.video.clientHeight;
 
         this.passiveTimer =  window.setInterval(() => {
           ctx.drawImage(this.video, 0, 0);
-          if (this.checkIfBlack()){
-            this.triggerRecording()
-          }
+          if (this.checkIfBlack()) this.triggerRecording();
         }, PASSIVE_FETCH_INTERVAL);
       };
 
-      this.localMediaStream = stream
+      this.localMediaStream = stream;
     }, e => {
-      this.setState({
-        access: false
-      })
-    })
+      this.setState({access: false})
+    });
   }
 
   renderStatic(ctx) {
@@ -108,7 +103,7 @@ export default class App extends React.Component {
         </span>
       </div>
     );
-    
+
     this.inactiveCover = (
       <div>
         <img src="icon.png" onClick={e => this.triggerRecording()} />
@@ -155,73 +150,43 @@ export default class App extends React.Component {
   screenShot() {
     if (this.localMediaStream) {
       ctx.drawImage(this.video, 0, 0);
-      if (!this.checkIfBlack())
-        this.gif.addFrame(ctx, {copy: true, delay: FRAME_RATE});
-      else
-        window.setTimeout(e => this.stopRecording(), BUMP_DELAY)
+      if (!this.checkIfBlack()) {
+        this.gif.addFrame(ctx, {
+          copy: true,
+          delay: FRAME_RATE
+        });
+      }
+      else window.setTimeout(e => this.stopRecording(), BUMP_DELAY);
     }
   }
 
   checkIfBlack() {
-    let count = 0,
-      dark = 0,
-      cur,
-      imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let count = 0;
+    let result;
+    let dark = 0;
+    let cur;
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-    for (var i=0; i < canvas.width; i+=40) {
-      for (var j=0; i < canvas.height; i+=40) {
-        count++;
-        cur = (j * canvas.width + i) * 4;
+    for (let i = 0; i < canvas.width; i += 40) {
+      for (let j = 0; i < canvas.height; i += 40) {
+        let rgb;
+
         // (R + G + B)
-        if (imageData[cur] + imageData[cur+1] + imageData[cur+2] < DARK_TRESHOLD) dark++
+        cur = (j * canvas.width + i) * 4;
+        rgb = imageData[cur] + imageData[cur + 1] + imageData[cur + 2];
+        if (rgb < DARK_TRESHOLD) dark++;
+        count++;
       }
     }
-    let result = (dark/count > MIN_DARK_RATIO);
+    result = (dark / count > MIN_DARK_RATIO);
     return result;
-  }
-
-  upload(file) {
-
-    // file is from a <input> tag or from Drag'n Drop
-    // Is the file an image?
-
-    if (!file || !file.type.match(/image.*/)) return;
-
-    // It is!
-    // Let's build a FormData object
-
-    var fd = new FormData();
-    fd.append("image", file); // Append the file
-    fd.append("key", "6528448c258cff474ca9701c5bab6927");
-    // Get your own key: http://api.imgur.com/
-
-    // Create the XHR (Cross-Domain XHR FTW!!!)
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
-    xhr.onload = () => {
-      // Big win!
-      // The URL of the image is:
-      const link = JSON.parse(xhr.responseText).upload.links.original;
-      console.log(link);
-      this.copyToClipboard(link)
-    }
-    // Ok, I don't handle the errors. An exercice for the reader.
-    // And now, we send the formdata
-    xhr.send(fd);
-  }
-
-  blobToFile(theBlob, fileName){
-    /* A Blob() is almost a File() - it's just missing the two properties below which we will add */
-    theBlob.lastModifiedDate = new Date();
-    theBlob.name = fileName;
-    return theBlob;
   }
 
   stopRecording() {
     window.clearInterval(this.timer);
     this.timer = null;
     this.gif.render();
-    this.setState({captured: true})
+    this.setState({stage: "captured"});
   }
 
   openOptions() {
@@ -231,12 +196,10 @@ export default class App extends React.Component {
 
   triggerRecording() {
     window.clearInterval(this.passiveTimer);
-    this.setState({
-      countdown: true
-    });
-    window.setTimeout( () => {
+    this.setState({stage: "countdown"});
+    window.setTimeout(() => {
       if (this.state.access) {
-        this.setState({recording: true});
+        this.setState({stage: "recording"});
 
         if (!this.timer) {
           this.gif = new GIF({
@@ -248,43 +211,39 @@ export default class App extends React.Component {
 
           this.gif.on('finished', blob => {
             const blobURL = URL.createObjectURL(blob);
+
             document.querySelector('.le-img').src = blobURL;
-
             chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
-
             chrome.runtime.onMessage.addListener(msg => {
-              if (msg.action === 'sendLink') this.setState({link: msg.content})
-              if (msg.action === 'error') this.setState({error: true})
-            })
+              if (msg.action === 'sendLink') this.setState({stage: "finished"});
+              if (msg.action === 'error') this.setState({error: true});
+            });
           });
 
           this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
         } else this.stopRecording();
       }
-    }, 3000)
-  }
-
-  copyToClipboard(text) {
-    const input = document.createElement('input');
-    input.style.position = 'fixed';
-    input.style.opacity = 0;
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('Copy');
-    document.body.removeChild(input);
+    }, 3000);
   }
 
   render() {
-    let successCover = (this.state.recording ? (this.state.captured ? (this.state.link ? this.linkCover : this.capturedCover) : this.activeCover) : (this.state.countdown ? this.countdownCover : this.inactiveCover));
+    let successCover;
 
-    return(
+    switch (this.state.stage) {
+     case "inactive":  successCover = this.inactiveCover;  break;
+     case "countdown": successCover = this.countdownCover; break;
+     case "recording": successCover = this.activeCover;    break;
+     case "captured":  successCover = this.capturedCover;  break;
+     case "finished":  successCover = this.linkCover;      break;
+   }
+
+    return (
       <div className="app flicker scanlines">
         <Video/>
         <div className="cover">
           {(this.state.access) ? successCover : this.errorCover}
         </div>
       </div>
-    )
+    );
   }
 }
