@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server"
+    "start": "node server",
+    "build": "webpack; zip -r build/chrome.zip dist/extension"
   },
   "repository": {
     "type": "git",

@@ -6,6 +6,9 @@ import { GIF } from 'gif.js';
 
 import Video from './Video';
 
+const logo = new Image()
+logo.src = 'icon.png'
+
 // Shim getUserMedia
 navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -151,6 +154,7 @@ export default class App extends React.Component {
     if (this.localMediaStream) {
       ctx.drawImage(this.video, 0, 0);
       if (!this.checkIfBlack()) {
+        this.renderWatermark(ctx)
         this.gif.addFrame(ctx, {
           copy: true,
           delay: FRAME_RATE
@@ -158,6 +162,15 @@ export default class App extends React.Component {
       }
       else window.setTimeout(e => this.stopRecording(), BUMP_DELAY);
     }
+  }
+
+  renderWatermark(ctx) {
+    ctx.globalAlpha = 0.5
+    ctx.drawImage(logo, ctx.canvas.width - 70, ctx.canvas.height - 73, 50, 50);
+    ctx.globalAlpha = 1
+    ctx.font = "10px 'Press Start 2P'"
+    ctx.fillStyle = 'white'
+    ctx.fillText("gifbu.mp",ctx.canvas.width - 85,ctx.canvas.height - 10)
   }
 
   checkIfBlack() {
