@@ -45,10 +45,10 @@ function upload(file) {
       message: "Your GifBump is copied to the clipboard! Rad!\n" + link
     }, function (e) {console.log(e)})
 
-    localStorage.setItem('lastBump', link)
+    localStorage.setItem(String(id), link)
 
     chrome.notifications.onClicked.addListener(function (e){
-      if(localStorage.getItem('lastBump') === link) window.open(link)
+      if(localStorage.getItem(String(e)) === link) window.open(link)
     })
   }
 
