@@ -34,6 +34,6 @@
     "webpack": "^1.12.2"
   },
   "dependencies": {
-    
+    "bootstrap": "git://github.com/twbs/bootstrap.git#v4-dev"
   }
 }
