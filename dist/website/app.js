@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "/dist/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -53,9 +53,9 @@
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(10)['default'];
+	var _interopRequireDefault = __webpack_require__(2)['default'];
 
-	__webpack_require__(2);
+	__webpack_require__(3);
 
 	var _react = __webpack_require__(11);
 
@@ -76,19 +76,6 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
-/***/ function(module, exports) {
-
 	"use strict";
 
 	exports["default"] = function (obj) {
@@ -100,6 +87,19 @@
 	exports.__esModule = true;
 
 /***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19660,7 +19660,7 @@
 
 	var _classCallCheck = __webpack_require__(197)['default'];
 
-	var _interopRequireDefault = __webpack_require__(10)['default'];
+	var _interopRequireDefault = __webpack_require__(2)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
@@ -19731,7 +19731,7 @@
 	        _react2['default'].createElement(
 	          'div',
 	          { className: 'app-content' },
-	          _react2['default'].createElement('img', { className: 'bump', src: 'icon.png' }),
+	          _react2['default'].createElement('img', { className: 'bump', src: 'dist/website/icon.png' }),
 	          _react2['default'].createElement(
 	            'h1',
 	            null,

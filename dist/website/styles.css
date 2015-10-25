@@ -2284,7 +2284,7 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/ad38e2568df90044ff77bc1d0aec43f7.woff2) format("woff2");
+  src: url(/dist/ad38e2568df90044ff77bc1d0aec43f7.woff2) format("woff2");
   unicode-range: U400-45F, U490-491, U4B -4B 1, U2116; }
 
 /* greek */
@@ -2292,7 +2292,7 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/3bc62304337486bfa692626c860bec0c.woff2) format("woff2");
+  src: url(/dist/3bc62304337486bfa692626c860bec0c.woff2) format("woff2");
   unicode-range: U370-3FF; }
 
 /* latin-ext */
@@ -2300,7 +2300,7 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/83527027335081602e24aa82d2efd8ae.woff2) format("woff2");
+  src: url(/dist/83527027335081602e24aa82d2efd8ae.woff2) format("woff2");
   unicode-range: U100-24F, U1E -1EFF, U20A -20AB, U20AD-20CF, U2C 58C 7F, UA720-A7FF; }
 
 /* latin */
@@ -2308,52 +2308,52 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/9e388c2d435272ff5b83c821553869e8.woff2) format("woff2");
+  src: url(/dist/9e388c2d435272ff5b83c821553869e8.woff2) format("woff2");
   unicode-range: U0-0FF, U131, U152-153, U2C 6, U2DA, U2DC, U2000-206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
 
 @keyframes flicker {
   0% {
-    opacity: 0.26003; }
+    opacity: 0.82585; }
   5% {
-    opacity: 0.71776; }
+    opacity: 0.81449; }
   10% {
-    opacity: 0.18953; }
+    opacity: 0.3626; }
   15% {
-    opacity: 0.64785; }
+    opacity: 0.34619; }
   20% {
-    opacity: 0.4306; }
+    opacity: 0.96; }
   25% {
-    opacity: 0.8045; }
+    opacity: 0.72407; }
   30% {
-    opacity: 0.43043; }
+    opacity: 0.72006; }
   35% {
-    opacity: 0.18957; }
+    opacity: 0.40662; }
   40% {
-    opacity: 0.94676; }
+    opacity: 0.98332; }
   45% {
-    opacity: 0.84779; }
+    opacity: 0.41924; }
   50% {
-    opacity: 0.26256; }
+    opacity: 0.8429; }
   55% {
-    opacity: 0.37304; }
+    opacity: 0.19772; }
   60% {
-    opacity: 0.97561; }
+    opacity: 0.19452; }
   65% {
-    opacity: 0.19329; }
+    opacity: 0.41542; }
   70% {
-    opacity: 0.56569; }
+    opacity: 0.10599; }
   75% {
-    opacity: 0.9564; }
+    opacity: 0.54274; }
   80% {
-    opacity: 0.58053; }
+    opacity: 0.18398; }
   85% {
-    opacity: 0.49206; }
+    opacity: 0.0011; }
   90% {
-    opacity: 0.31459; }
+    opacity: 0.7945; }
   95% {
-    opacity: 0.04284; }
+    opacity: 0.95133; }
   100% {
-    opacity: 0.34293; } }
+    opacity: 0.61351; } }
 
 .flicker {
   position: relative; }
