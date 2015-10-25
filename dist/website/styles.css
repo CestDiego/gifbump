@@ -2284,7 +2284,7 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/dist/ad38e2568df90044ff77bc1d0aec43f7.woff2) format("woff2");
+  src: local("Press Start 2P"), local("PressStart2P-Regular"), url(/dist/ad38e2568df90044ff77bc1d0aec43f7.woff2) format("woff2"), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7ozT1DHLc-lgcGofyQSe5eyY.woff2) format("woff2");
   unicode-range: U400-45F, U490-491, U4B -4B 1, U2116; }
 
 /* greek */
@@ -2292,7 +2292,7 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/dist/3bc62304337486bfa692626c860bec0c.woff2) format("woff2");
+  src: local("Press Start 2P"), local("PressStart2P-Regular"), url(/dist/3bc62304337486bfa692626c860bec0c.woff2) format("woff2"), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7owWe3iFntbc1RMxbGEkS-xE.woff2) format("woff2");
   unicode-range: U370-3FF; }
 
 /* latin-ext */
@@ -2300,7 +2300,7 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/dist/83527027335081602e24aa82d2efd8ae.woff2) format("woff2");
+  src: local("Press Start 2P"), local("PressStart2P-Regular"), url(/dist/83527027335081602e24aa82d2efd8ae.woff2) format("woff2"), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o6SkDmgNrBPNFeI4cxdj3Ko.woff2) format("woff2");
   unicode-range: U100-24F, U1E -1EFF, U20A -20AB, U20AD-20CF, U2C 58C 7F, UA720-A7FF; }
 
 /* latin */
@@ -2308,52 +2308,52 @@ a.bg-danger:hover {
   font-family: 'Press Start 2P';
   font-style: normal;
   font-weight: 400;
-  src: url(/dist/9e388c2d435272ff5b83c821553869e8.woff2) format("woff2");
+  src: local("Press Start 2P"), local("PressStart2P-Regular"), url(/dist/9e388c2d435272ff5b83c821553869e8.woff2) format("woff2"), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o69WAFmVxfVhVkWhl-QDeAk.woff2) format("woff2");
   unicode-range: U0-0FF, U131, U152-153, U2C 6, U2DA, U2DC, U2000-206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
 
 @keyframes flicker {
   0% {
-    opacity: 0.82585; }
+    opacity: 0.39293; }
   5% {
-    opacity: 0.81449; }
+    opacity: 0.37175; }
   10% {
-    opacity: 0.3626; }
+    opacity: 0.20507; }
   15% {
-    opacity: 0.34619; }
+    opacity: 0.65897; }
   20% {
-    opacity: 0.96; }
+    opacity: 0.61714; }
   25% {
-    opacity: 0.72407; }
+    opacity: 0.51164; }
   30% {
-    opacity: 0.72006; }
+    opacity: 0.64419; }
   35% {
-    opacity: 0.40662; }
+    opacity: 0.06067; }
   40% {
-    opacity: 0.98332; }
+    opacity: 0.46373; }
   45% {
-    opacity: 0.41924; }
+    opacity: 0.97183; }
   50% {
-    opacity: 0.8429; }
+    opacity: 0.59735; }
   55% {
-    opacity: 0.19772; }
+    opacity: 0.21971; }
   60% {
-    opacity: 0.19452; }
+    opacity: 0.75102; }
   65% {
-    opacity: 0.41542; }
+    opacity: 0.91992; }
   70% {
-    opacity: 0.10599; }
+    opacity: 0.37718; }
   75% {
-    opacity: 0.54274; }
+    opacity: 0.03269; }
   80% {
-    opacity: 0.18398; }
+    opacity: 0.1855; }
   85% {
-    opacity: 0.0011; }
+    opacity: 0.1055; }
   90% {
-    opacity: 0.7945; }
+    opacity: 0.5363; }
   95% {
-    opacity: 0.95133; }
+    opacity: 0.10966; }
   100% {
-    opacity: 0.61351; } }
+    opacity: 0.61149; } }
 
 .flicker {
   position: relative; }
