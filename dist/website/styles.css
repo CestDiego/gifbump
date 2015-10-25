@@ -2313,6 +2313,7 @@ a.bg-danger:hover {
 
 @keyframes flicker {
   0% {
+<<<<<<< HEAD
     opacity: 0.39293; }
   5% {
     opacity: 0.37175; }
@@ -2354,6 +2355,49 @@ a.bg-danger:hover {
     opacity: 0.10966; }
   100% {
     opacity: 0.61149; } }
+=======
+    opacity: 0.32302; }
+  5% {
+    opacity: 0.87745; }
+  10% {
+    opacity: 0.35023; }
+  15% {
+    opacity: 0.31855; }
+  20% {
+    opacity: 0.05849; }
+  25% {
+    opacity: 0.9199; }
+  30% {
+    opacity: 0.53041; }
+  35% {
+    opacity: 0.2713; }
+  40% {
+    opacity: 0.73016; }
+  45% {
+    opacity: 0.13932; }
+  50% {
+    opacity: 0.54346; }
+  55% {
+    opacity: 0.88482; }
+  60% {
+    opacity: 0.31489; }
+  65% {
+    opacity: 0.69671; }
+  70% {
+    opacity: 0.06363; }
+  75% {
+    opacity: 0.14024; }
+  80% {
+    opacity: 0.33439; }
+  85% {
+    opacity: 0.22303; }
+  90% {
+    opacity: 0.11812; }
+  95% {
+    opacity: 0.8004; }
+  100% {
+    opacity: 0.94582; } }
+>>>>>>> 710f413574cb8cb365d7455cc7f1c908f51bd35f
 
 .flicker {
   position: relative; }

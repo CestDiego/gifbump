@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { GIF } from 'gif.js';
 
 import Video from './Video';
+import Finished from './Finished';
 
 const logo = new Image()
 logo.src = 'icon.png'
@@ -228,7 +229,7 @@ export default class App extends React.Component {
             document.querySelector('.le-img').src = blobURL;
             chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
             chrome.runtime.onMessage.addListener(msg => {
-              if (msg.action === 'sendLink') this.setState({stage: "finished"});
+              if (msg.action === 'sendLink') this.setState({stage: "finished", link: msg.content});
               if (msg.action === 'error') this.setState({error: true});
             });
           });
@@ -243,11 +244,11 @@ export default class App extends React.Component {
     let successCover;
 
     switch (this.state.stage) {
-     case "inactive":  successCover = this.inactiveCover;  break;
-     case "countdown": successCover = this.countdownCover; break;
-     case "recording": successCover = this.activeCover;    break;
-     case "captured":  successCover = this.capturedCover;  break;
-     case "finished":  successCover = this.linkCover;      break;
+      case "inactive":  successCover = this.inactiveCover;  break;
+      case "countdown": successCover = this.countdownCover; break;
+      case "recording": successCover = this.activeCover;    break;
+      case "captured":  successCover = this.capturedCover;  break;
+      case "finished":  successCover = <Finished link={this.state.link}/>;      break;
    }
 
     return (
