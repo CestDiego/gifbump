@@ -1,4 +1,5 @@
 .tern-port
+CNAME
 /node_modules
 dist/extension/app.js
 dist/extension/options.js
