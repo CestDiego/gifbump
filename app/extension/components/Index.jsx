@@ -10,26 +10,26 @@ import Finished from './Finished';
 const logo = new Image()
 logo.src = 'icon.png'
 
-// Shim getUserMedia
-navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+// // Shim getUserMedia
+// navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-// Create canvas and context
-let ctx, canvas;
+// // Create canvas and context
+// let ctx, canvas;
 
-// Constants
-const DARK_TRESHOLD          = 130;
-const MIN_DARK_RATIO         = 0.8;
-const FRAME_RATE             = 1000 / 15;
-const PASSIVE_FETCH_INTERVAL = FRAME_RATE * 5;
-const BUMP_DELAY             = FRAME_RATE * 3;
-const videoSettings = {
-  video: {
-    mandatory: {
-      maxWidth: 640,
-      maxHeight: 360
-    }
-  }
-};
+// // Constants
+// const DARK_TRESHOLD          = 130;
+// const MIN_DARK_RATIO         = 0.8;
+// const FRAME_RATE             = 1000 / 15;
+// const PASSIVE_FETCH_INTERVAL = FRAME_RATE * 5;
+// const BUMP_DELAY             = FRAME_RATE * 3;
+// const videoSettings = {
+//   video: {
+//     mandatory: {
+//       maxWidth: 640,
+//       maxHeight: 360
+//     }
+//   }
+// };
 
 export default class App extends React.Component {
   constructor(props) {
@@ -92,30 +92,30 @@ export default class App extends React.Component {
   }
 
   renderElements() {
-    this.errorCover = (
-      <div>
-        <img src="icon.png" />
-        <span className="error">
-          <br/>
-          <span>GIF ME ACCESS!</span>
-          <br/><br/>
-          <span><small>
-            We need to access your camera for bumping action, go to &nbsp;
-            <span className="link" onClick={ e => this.openOptions(e) }>options</span>
-            &nbsp; to enable camera access
-          </small></span>
-        </span>
-      </div>
-    );
+    // this.errorCover = (
+    //   <div>
+    //     <img src="icon.png" />
+    //     <span className="error">
+    //       <br/>
+    //       <span>GIF ME ACCESS!</span>
+    //       <br/><br/>
+    //       <span><small>
+    //         We need to access your camera for bumping action, go to &nbsp;
+    //         <span className="link" onClick={ e => this.openOptions(e) }>options</span>
+    //         &nbsp; to enable camera access
+    //       </small></span>
+    //     </span>
+    //   </div>
+    // );
 
-    this.inactiveCover = (
-      <div>
-        <img src="icon.png" onClick={e => this.triggerRecording()} />
-        <h2>
-          BUMP TO <small>(GIF)</small>BUMP!
-        </h2>
-      </div>
-    );
+    // this.inactiveCover = (
+    //   <div>
+    //     <img src="icon.png" onClick={e => this.triggerRecording()} />
+    //     <h2>
+    //       BUMP TO <small>(GIF)</small>BUMP!
+    //     </h2>
+    //   </div>
+    // );
 
     this.activeCover = (
       <div>

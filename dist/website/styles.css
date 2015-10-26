@@ -2313,91 +2313,47 @@ a.bg-danger:hover {
 
 @keyframes flicker {
   0% {
-<<<<<<< HEAD
-    opacity: 0.39293; }
+    opacity: 0.1285; }
   5% {
-    opacity: 0.37175; }
+    opacity: 0.35073; }
   10% {
-    opacity: 0.20507; }
+    opacity: 0.33075; }
   15% {
-    opacity: 0.65897; }
+    opacity: 0.76486; }
   20% {
-    opacity: 0.61714; }
+    opacity: 0.10949; }
   25% {
-    opacity: 0.51164; }
+    opacity: 0.29544; }
   30% {
-    opacity: 0.64419; }
+    opacity: 0.45006; }
   35% {
-    opacity: 0.06067; }
+    opacity: 0.67982; }
   40% {
-    opacity: 0.46373; }
+    opacity: 0.03589; }
   45% {
-    opacity: 0.97183; }
+    opacity: 0.97597; }
   50% {
-    opacity: 0.59735; }
+    opacity: 0.39406; }
   55% {
-    opacity: 0.21971; }
+    opacity: 0.22328; }
   60% {
-    opacity: 0.75102; }
+    opacity: 0.63639; }
   65% {
-    opacity: 0.91992; }
+    opacity: 0.74517; }
   70% {
-    opacity: 0.37718; }
+    opacity: 0.82617; }
   75% {
-    opacity: 0.03269; }
+    opacity: 0.11948; }
   80% {
-    opacity: 0.1855; }
+    opacity: 0.32115; }
   85% {
-    opacity: 0.1055; }
+    opacity: 0.25018; }
   90% {
-    opacity: 0.5363; }
+    opacity: 0.17336; }
   95% {
-    opacity: 0.10966; }
+    opacity: 0.57085; }
   100% {
-    opacity: 0.61149; } }
-=======
-    opacity: 0.32302; }
-  5% {
-    opacity: 0.87745; }
-  10% {
-    opacity: 0.35023; }
-  15% {
-    opacity: 0.31855; }
-  20% {
-    opacity: 0.05849; }
-  25% {
-    opacity: 0.9199; }
-  30% {
-    opacity: 0.53041; }
-  35% {
-    opacity: 0.2713; }
-  40% {
-    opacity: 0.73016; }
-  45% {
-    opacity: 0.13932; }
-  50% {
-    opacity: 0.54346; }
-  55% {
-    opacity: 0.88482; }
-  60% {
-    opacity: 0.31489; }
-  65% {
-    opacity: 0.69671; }
-  70% {
-    opacity: 0.06363; }
-  75% {
-    opacity: 0.14024; }
-  80% {
-    opacity: 0.33439; }
-  85% {
-    opacity: 0.22303; }
-  90% {
-    opacity: 0.11812; }
-  95% {
-    opacity: 0.8004; }
-  100% {
-    opacity: 0.94582; } }
->>>>>>> 710f413574cb8cb365d7455cc7f1c908f51bd35f
+    opacity: 0.84467; } }
 
 .flicker {
   position: relative; }

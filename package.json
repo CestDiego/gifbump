@@ -34,6 +34,9 @@
     "webpack": "^1.12.2"
   },
   "dependencies": {
-    "bootstrap": "git://github.com/twbs/bootstrap.git#v4-dev"
+    "bootstrap": "git://github.com/twbs/bootstrap.git#v4-dev",
+    "history": "^1.12.6",
+    "react-router": "^1.0.0-rc3",
+    "redux-router": "^1.0.0-beta3"
   }
 }
