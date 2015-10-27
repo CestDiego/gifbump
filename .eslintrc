@@ -17,6 +17,7 @@
     "navigator": false,
     "unescape": false,
     "window": false,
+    "chrome": true,
     "describe": true,
     "before": true,
     "it": true,

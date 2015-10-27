@@ -18,14 +18,14 @@ class Options extends React.Component {
 
 	requestPermission() {
 		// Get user media, or ask for permissions
-	  	navigator.getUserMedia(
-  			{video: true},
-	  		s => this.setState({access:true}), 
-	  		e => this.setState({access:false})
-	  	)		
-	}
+    navigator.getUserMedia(
+      {video: true},
+      s => this.setState({access:true}), 
+      e => this.setState({access:false})
+    )
+  }
 
-	render() {
+  render() {
 		return(
 			<div>
 				<div>GIFBUMP Configuration</div>

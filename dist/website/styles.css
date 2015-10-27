@@ -372,8 +372,8 @@ output {
   display: inline-block; }
 
 .container {
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem; }
   @media (min-width: 544px) {
@@ -390,8 +390,8 @@ output {
       max-width: 1140px; } }
 
 .container-fluid {
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem; }
 
@@ -2313,47 +2313,47 @@ a.bg-danger:hover {
 
 @keyframes flicker {
   0% {
-    opacity: 0.87176; }
+    opacity: 0.9794; }
   5% {
-    opacity: 0.63138; }
+    opacity: 0.19636; }
   10% {
-    opacity: 0.85413; }
+    opacity: 0.50005; }
   15% {
-    opacity: 0.37676; }
+    opacity: 0.55198; }
   20% {
-    opacity: 0.15007; }
+    opacity: 0.55764; }
   25% {
-    opacity: 0.93125; }
+    opacity: 0.75603; }
   30% {
-    opacity: 0.04589; }
+    opacity: 0.94158; }
   35% {
-    opacity: 0.08938; }
+    opacity: 0.78822; }
   40% {
-    opacity: 0.87802; }
+    opacity: 0.06363; }
   45% {
-    opacity: 0.66307; }
+    opacity: 0.40292; }
   50% {
-    opacity: 0.87052; }
+    opacity: 0.09596; }
   55% {
-    opacity: 0.56614; }
+    opacity: 0.05818; }
   60% {
-    opacity: 0.53376; }
+    opacity: 0.01935; }
   65% {
-    opacity: 0.96068; }
+    opacity: 0.81847; }
   70% {
-    opacity: 0.91297; }
+    opacity: 0.1968; }
   75% {
-    opacity: 0.84326; }
+    opacity: 0.96631; }
   80% {
-    opacity: 0.8423; }
+    opacity: 0.51013; }
   85% {
-    opacity: 0.15607; }
+    opacity: 0.26465; }
   90% {
-    opacity: 0.16019; }
+    opacity: 0.37532; }
   95% {
-    opacity: 0.34863; }
+    opacity: 0.7507; }
   100% {
-    opacity: 0.7139; } }
+    opacity: 0.03774; } }
 
 .flicker {
   position: relative; }
