@@ -1,14 +1,14 @@
-import 'styles/extensions.scss';
+// import 'styles/extensions.scss';
 
-import React 	from 'react';
-import ReactDOM from 'react-dom';
-import { GIF } from 'gif.js';
+// import React 	from 'react';
+// import ReactDOM from 'react-dom';
+// import { GIF } from 'gif.js';
 
-import Video from './Video';
-import Finished from './Finished';
+// import Video from './Video';
+// import Finished from './Finished';
 
-const logo = new Image()
-logo.src = 'icon.png'
+// const logo = new Image()
+// logo.src = 'icon.png'
 
 // // Shim getUserMedia
 // navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -32,14 +32,14 @@ logo.src = 'icon.png'
 // };
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {stage: "inactive"};
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {stage: "inactive"};
+  // }
 
-  componentWillMount() {
-    this.renderElements();
-  }
+  // componentWillMount() {
+  //   this.renderElements();
+  // }
 
   componentDidMount() {
     const elm = ReactDOM.findDOMNode(this);
@@ -151,19 +151,19 @@ export default class App extends React.Component {
     );
   }
 
-  screenShot() {
-    if (this.localMediaStream) {
-      ctx.drawImage(this.video, 0, 0);
-      if (!this.checkIfBlack()) {
-        this.renderWatermark(ctx)
-        this.gif.addFrame(ctx, {
-          copy: true,
-          delay: FRAME_RATE
-        });
-      }
-      else window.setTimeout(e => this.stopRecording(), BUMP_DELAY);
-    }
-  }
+  // screenShot() {
+  //   if (this.localMediaStream) {
+  //     ctx.drawImage(this.video, 0, 0);
+  //     if (!this.checkIfBlack()) {
+  //       this.renderWatermark(ctx)
+  //       this.gif.addFrame(ctx, {
+  //         copy: true,
+  //         delay: FRAME_RATE
+  //       });
+  //     }
+  //     else window.setTimeout(e => this.stopRecording(), BUMP_DELAY);
+  //   }
+  // }
 
   renderWatermark(ctx) {
     ctx.globalAlpha = 0.5
@@ -174,27 +174,27 @@ export default class App extends React.Component {
     ctx.fillText("gifbu.mp",ctx.canvas.width - 85,ctx.canvas.height - 10)
   }
 
-  checkIfBlack() {
-    let count = 0;
-    let result;
-    let dark = 0;
-    let cur;
-    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  // checkIfBlack() {
+  //   let count = 0;
+  //   let result;
+  //   let dark = 0;
+  //   let cur;
+  //   let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-    for (let i = 0; i < canvas.width; i += 40) {
-      for (let j = 0; i < canvas.height; i += 40) {
-        let rgb;
+  //   for (let i = 0; i < canvas.width; i += 40) {
+  //     for (let j = 0; i < canvas.height; i += 40) {
+  //       let rgb;
 
-        // (R + G + B)
-        cur = (j * canvas.width + i) * 4;
-        rgb = imageData[cur] + imageData[cur + 1] + imageData[cur + 2];
-        if (rgb < DARK_TRESHOLD) dark++;
-        count++;
-      }
-    }
-    result = (dark / count > MIN_DARK_RATIO);
-    return result;
-  }
+  //       // (R + G + B)
+  //       cur = (j * canvas.width + i) * 4;
+  //       rgb = imageData[cur] + imageData[cur + 1] + imageData[cur + 2];
+  //       if (rgb < DARK_TRESHOLD) dark++;
+  //       count++;
+  //     }
+  //   }
+  //   result = (dark / count > MIN_DARK_RATIO);
+  //   return result;
+  // }
 
   stopRecording() {
     window.clearInterval(this.timer);
@@ -203,61 +203,61 @@ export default class App extends React.Component {
     this.setState({stage: "captured"});
   }
 
-  openOptions() {
-    console.log('WHAAKLSJLAKJS');
-    chrome.tabs.create({url: 'options.html'});
-  }
+  // openOptions() {
+  //   console.log('WHAAKLSJLAKJS');
+  //   chrome.tabs.create({url: 'options.html'});
+  // }
 
-  triggerRecording() {
-    window.clearInterval(this.passiveTimer);
-    this.setState({stage: "countdown"});
-    window.setTimeout(() => {
-      if (this.state.access) {
-        this.setState({stage: "recording"});
+  // triggerRecording() {
+  //   window.clearInterval(this.passiveTimer);
+  //   this.setState({stage: "countdown"});
+  //   window.setTimeout(() => {
+  //     if (this.state.access) {
+  //       this.setState({stage: "recording"});
 
-        if (!this.timer) {
-          this.gif = new GIF({
-            workers: 4,
-            quality: 10,
-            width: this.video.clientWidth,
-            height: this.video.clientHeight
-          });
+  //       if (!this.timer) {
+  //         this.gif = new GIF({
+  //           workers: 4,
+  //           quality: 10,
+  //           width: this.video.clientWidth,
+  //           height: this.video.clientHeight
+  //         });
 
-          this.gif.on('finished', blob => {
-            const blobURL = URL.createObjectURL(blob);
+  //         this.gif.on('finished', blob => {
+  //           const blobURL = URL.createObjectURL(blob);
 
-            document.querySelector('.le-img').src = blobURL;
-            chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
-            chrome.runtime.onMessage.addListener(msg => {
-              if (msg.action === 'sendLink') this.setState({stage: "finished", link: msg.content});
-              if (msg.action === 'error') this.setState({error: true});
-            });
-          });
+  //           document.querySelector('.le-img').src = blobURL;
+  //           chrome.runtime.sendMessage({action: 'uploadFile', content: blobURL});
+  //           chrome.runtime.onMessage.addListener(msg => {
+  //             if (msg.action === 'sendLink') this.setState({stage: "finished", link: msg.content});
+  //             if (msg.action === 'error') this.setState({error: true});
+  //           });
+  //         });
 
-          this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
-        } else this.stopRecording();
-      }
-    }, 3000);
-  }
+  //         this.timer = window.setInterval(e => this.screenShot(), FRAME_RATE);
+  //       } else this.stopRecording();
+  //     }
+  //   }, 3000);
+  // }
 
-  render() {
-    let successCover;
+//   render() {
+//     let successCover;
 
-    switch (this.state.stage) {
-      case "inactive":  successCover = this.inactiveCover;  break;
-      case "countdown": successCover = this.countdownCover; break;
-      case "recording": successCover = this.activeCover;    break;
-      case "captured":  successCover = this.capturedCover;  break;
-      case "finished":  successCover = <Finished link={this.state.link}/>;      break;
-   }
+//     switch (this.state.stage) {
+//       case "inactive":  successCover = this.inactiveCover;  break;
+//       case "countdown": successCover = this.countdownCover; break;
+//       case "recording": successCover = this.activeCover;    break;
+//       case "captured":  successCover = this.capturedCover;  break;
+//       case "finished":  successCover = <Finished link={this.state.link}/>;      break;
+//    }
 
-    return (
-      <div className="app flicker scanlines">
-        <Video/>
-        <div className="cover">
-          {(this.state.access) ? successCover : this.errorCover}
-        </div>
-      </div>
-    );
-  }
-}
+//     return (
+//       <div className="app flicker scanlines">
+//         <Video/>
+//         <div className="cover">
+//           {(this.state.access) ? successCover : this.errorCover}
+//         </div>
+//       </div>
+//     );
+//   }
+// }

@@ -1,3 +1,8 @@
+import { GIF }  		 from 'gif.js';
+
+const logo = new Image()
+logo.src = 'icon.png'
+
 // Shim getUserMedia
 navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 window.URL = window.URL || window.webkitURL
@@ -39,9 +44,10 @@ class MediaManager {
     });
 	}
 
-	attachElements(ctx, video) {
+	attachElements(ctx, video, image) {
 		this.ctx 	 = ctx
 		this.video = video
+		this.image = image
 	}
 
 	startCheck(callback) {
@@ -77,6 +83,59 @@ class MediaManager {
 	stopCheck(callback) {
 		clearInterval(this.checkInterval)
 		callback()
+	}
+
+	capture(onStop, onDone) {
+    this.gif = new GIF({
+      workers: 4,
+      quality: 10,
+      width: this.video.clientWidth,
+      height: this.video.clientHeight
+    });
+
+    this.gif.on('finished', blob => {
+      this.blobURL = URL.createObjectURL(blob);
+      this.image.src = this.blobURL;
+      onDone(this.blobURL)
+    });
+
+    this.captureInterval = window.setInterval(e => this.screenShot(onStop), FRAME_RATE);
+	}
+
+  screenShot(onStop) {
+    this.ctx.drawImage(this.video, 0, 0);
+
+    if (!this.checkBlack()) {
+      this.renderWatermark()
+      this.gif.addFrame(this.ctx, {
+        copy: true,
+        delay: FRAME_RATE
+      });
+    } else {
+			window.setTimeout(e => {
+				clearInterval(this.captureInterval)
+		    this.gif.render();
+		    onStop();
+			}, BUMP_DELAY);
+    }
+  }
+
+  renderWatermark() {
+    this.ctx.globalAlpha = 0.5
+    this.ctx.drawImage(logo, this.ctx.canvas.width - 70, this.ctx.canvas.height - 73, 50, 50);
+    this.ctx.globalAlpha = 1
+    this.ctx.font = "10px 'Press Start 2P'"
+    this.ctx.fillStyle = 'white'
+    this.ctx.fillText("gifbu.mp",this.ctx.canvas.width - 85,this.ctx.canvas.height - 10)
+  }
+
+	upload(callback) {
+    chrome.runtime.sendMessage({action: 'uploadFile', content: this.blobURL});
+    chrome.runtime.onMessage.addListener( msg => callback(msg) );
+	}
+
+	clearPreview() {
+		this.image.src = ''
 	}
 }
 

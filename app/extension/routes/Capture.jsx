@@ -5,21 +5,40 @@ import { Link } from 'react-router';
 import media    from '../controllers/media'
 import history  from '../controllers/history'
 
-export default class IndexRoute extends React.Component {
-  openOptions() {
-    chrome.tabs.create({url: 'options.html'});
+const COUNTDOWN = 3000
+
+export default class CaptureRoute extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      capture: false,
+      stopped: false
+    }
   }
 
   componentDidMount(){
-    // Get user media, or ask for permissions
-    media.getStream(streamUrl => null, e => history.replaceState(null, '/permission') );
+    setTimeout(
+      () =>  {
+        this.setState({capture: true})
+        media.capture(
+          () => this.setState({capture: false, stopped: true}),
+          () => history.replaceState(null, '/preview')
+        )
+      }, 
+    COUNTDOWN)
   }
 
+
   render() {
-    if(this.ready) return (
+    if(this.state.capture) return (
       <div>
         <h2>Bump da camera!</h2>
+      </div>
+    );
 
+    if(this.state.stopped) return (
+      <div>
+        <h2>Processing your bump...</h2>
       </div>
     );
 

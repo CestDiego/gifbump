@@ -11,19 +11,23 @@ import {Router, Route, Link} from 'react-router'
 import history from './controllers/history'
 
 // Components
-import Preview from './components/Preview'
+import Media from './components/Media'
 
 // Routes
 import Index 			from './routes/Index'
 import Permission from './routes/Permission'
 import Capture    from './routes/Capture'
+import Preview    from './routes/Preview'
+import Cloud      from './routes/SomeoneElsesComputer'
 
 // Render app container
 ReactDOM.render(
 	<div className="app flicker scanlines">
-		<Preview/>
+		<Media/>
 		<div className="cover">
 			<Router history={history}>
+				<Route path="/upload"     component={ Cloud }/>
+				<Route path="/preview"    component={ Preview }/>
 				<Route path="/capture"    component={ Capture }/>
 				<Route path="/permission" component={ Permission }/>
 				<Route path="*"           component={ Index }/>

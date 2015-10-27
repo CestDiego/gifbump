@@ -11,6 +11,8 @@ export default class IndexRoute extends React.Component {
   }
 
   componentDidMount(){
+    media.clearPreview()
+    
     // Get user media, or ask for permissions
     media.getStream(streamUrl => {
       media.startCheck( reactSucks => history.replaceState(null, '/capture') )

@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import media    from '../controllers/media'
 import history  from '../controllers/history'
 
-export default class IndexRoute extends React.Component {
+export default class PermissionRoute extends React.Component {
   openOptions(e) {
     chrome.tabs.create({url: 'options.html'});
   }
