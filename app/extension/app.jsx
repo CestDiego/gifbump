@@ -1,24 +1,24 @@
 import 'styles/extensions.scss';
 
-import { GIF } 	from 'gif.js'
-import React 	from 'react'
-import ReactDOM from 'react-dom'
+import React 	from 'react';
+import ReactDOM from 'react-dom';
 
 // Router
-import {Router, Route, Link} from 'react-router'
+import {Router, Route} from 'react-router';
 
 // Controllers
-import history from './controllers/history'
+import history from './controllers/history';
 
 // Components
-import Media from './components/Media'
+import Media from './components/Media';
 
 // Routes
-import Index 			from './routes/Index'
-import Permission from './routes/Permission'
-import Capture    from './routes/Capture'
-import Preview    from './routes/Preview'
-import Cloud      from './routes/SomeoneElsesComputer'
+import Index 			from './routes/Index';
+import Permission from './routes/Permission';
+import Capture    from './routes/Capture';
+import Share      from './routes/Share';
+import Preview    from './routes/Preview';
+import Cloud      from './routes/SomeoneElsesComputer';
 
 // Render app container
 ReactDOM.render(
@@ -27,7 +27,8 @@ ReactDOM.render(
 		<div className="cover">
 			<Router history={history}>
 				<Route path="/upload"     component={ Cloud }/>
-				<Route path="/preview"    component={ Preview }/>
+        <Route path="/share"      component={ Share }/>
+        <Route path="/preview"    component={ Preview }/>
 				<Route path="/capture"    component={ Capture }/>
 				<Route path="/permission" component={ Permission }/>
 				<Route path="*"           component={ Index }/>
@@ -35,12 +36,11 @@ ReactDOM.render(
 		</div>
 	</div>,
   document.getElementById('container')
-)
-
+);
 
 /*
 	New Routes
-*/ 
+*/
 
 // <Route path="/capture" 	  component={ Capture }/>
 // <Route path="/preview" 	  component={ Preview }/>
