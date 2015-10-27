@@ -27,7 +27,7 @@ ReactDOM.render(
 		<div className="cover">
 			<Router history={history}>
 				<Route path="/upload"     component={ Cloud }/>
-        <Route path="/share"      component={ Share }/>
+        <Route path="/share/:url" component={ Share }/>
         <Route path="/preview"    component={ Preview }/>
 				<Route path="/capture"    component={ Capture }/>
 				<Route path="/permission" component={ Permission }/>

@@ -7,13 +7,14 @@ const COUNTDOWN = 3000;
 
 export default class ShareRoute extends React.Component {
   constructor() {
+    super()
     this.state = {
       capture: false
     }
   }
 
-  openOptions() {
-    chrome.tabs.create({url: 'options.html'});
+  openBump(url){
+    chrome.tabs.create({url});
   }
 
   componentDidMount(){
@@ -26,11 +27,11 @@ export default class ShareRoute extends React.Component {
   }
 
   render() {
-    const link = "http://reddit.com";
+    const url = `http://go.gifbu.mp/${ this.props.params.url }.gif`
     return (
-      <div>
+      <div onClick={ e => this.openBump(url) }>
       <h2>Bump is uploaded</h2>
-      <p>{ link }</p>
+      <a href="#">{ url }</a>
       </div>
     );
   }

@@ -17,11 +17,10 @@ export default class LiesRoute extends React.Component {
 
   componentDidMount(){
     media.upload(msg => {
-      // TODO: go to error screen
-      // if (msg.action === 'error') this.setState({error: true});
-
       console.log(msg)
-      if (msg.action === 'sendLink') history.replaceState(null, '/share');
+      // TODO: go to error screen
+      if (msg.action === 'error') history.replaceState(null, '/error');
+      if (msg.action === 'sendLink') history.replaceState(null, `/share/${ msg.content.match(/.mp\/(.*).gif/)[1] }`);
     } )
   } 
 

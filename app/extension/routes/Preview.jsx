@@ -15,6 +15,7 @@ export default class PreviewRoute extends React.Component {
           <Link to='/upload'>
             <span>Yay!</span>
           </Link>
+            <span>&nbsp;&nbsp;</span>
           <Link to='/'>
             <span>Nay...</span>
           </Link>
