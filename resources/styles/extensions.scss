@@ -8,6 +8,7 @@ body {
 	margin: 0;
 
 	* {
+		outline: none;
 			   user-select: none;
 		webkit-user-select: none;
 	}
@@ -44,6 +45,7 @@ canvas {
 	cursor: pointer;
 	text-decoration: underline;
 }
+
 
 .le-img {
 	position: absolute;
