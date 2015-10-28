@@ -4,7 +4,9 @@
 
 With the magic of the :cloud: you can now send :facepunch:s on the line! It's magic! :scream:
 
-**GifBump** :facepunch: is a browser extenstion (currently Chrome only, Firefox coming soon) for sharing fist bumps! :boom:so rad:boom:!
+**GifBump** :facepunch: is a browser extenstion (currently Chrome only, Firefox coming soon) for sharing fist bumps! :boom:so rad:boom:
+
+<img src="http://i.imgur.com/Ye6OKwG.gif" width="500"/>
 
 ## Installing GifBump
 To install **GifBump** install the Chrome extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/gifbump/bacfjdhpbcepapbkibpdmpaikphomene) or from [gifbu.mp](http://gifbu.mp/)
