@@ -1,5 +1,7 @@
 # GifBump:tm: <img src="/dist/extension/icon.png" width="50" style="-15px"/>
 
+   [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://github.com/syl20bnr/spacemacs)
+
 :facepunch: Fist bumps are awesome, but what if you're far away:interrobang::interrobang::interrobang: That sucks... :sob:
 
 With the magic of the :cloud: you can now send :facepunch:s on the line! It's magic! :scream:
